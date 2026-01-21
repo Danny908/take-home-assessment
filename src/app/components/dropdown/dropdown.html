@@ -1,0 +1,56 @@
+<div
+  class="dropdown"
+  role="combobox"
+  aria-haspopup="listbox"
+  tabindex="0"
+  cdkOverlayOrigin
+  [cdkMenuTriggerFor]="optionsList"
+  [cdkMenuPosition]="optionsPosition"
+  [class.is-active]="isOpen()"
+  (cdkMenuOpened)="isOpen.set(true)"
+  (cdkMenuClosed)="isOpen.set(false)"
+  (input)="onInput($event)"
+  (blur)="onTouched()"
+  #menuTrigger="cdkOverlayOrigin"
+>
+  @if (customSelectionEl) {
+    <ng-container
+      [ngTemplateOutlet]="customSelectionEl"
+      [ngTemplateOutletContext]="{ $implicit: val(), display: selection() }"
+    >
+    </ng-container>
+  } @else {
+    <span>{{ selection() }}</span>
+  }
+  @if (!val()) {
+    <span class="placeholder">
+      {{ placeholder }}
+    </span>
+  }
+  <mat-icon class="material-icons-round" [fontIcon]="icon" aria-hidden="true"></mat-icon>
+</div>
+<!-- Use as handler for form validations -->
+<input type="text" />
+<!-- Dropdown template options -->
+<ng-template
+  #optionsList
+  cdkConnectedOverlay
+  [cdkConnectedOverlayOrigin]="menuTrigger"
+  [cdkConnectedOverlayWidth]="'auto'"
+>
+  <div
+    cdkMenu
+    class="options-list"
+    [style.width.px]="menuTrigger.elementRef.nativeElement.offsetWidth"
+  >
+    @for (option of options; track $index) {
+      <button
+        cdkMenuItem
+        [class.selected]="val() === option.value"
+        (cdkMenuItemTriggered)="optionSelected(option.value)"
+      >
+        {{ option.display }}
+      </button>
+    }
+  </div>
+</ng-template>

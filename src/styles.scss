@@ -1,1 +1,224 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+  --main-font: 'Circular-Std';
+  --primary-color-light: rgb(62, 64, 219);
+  --primary-color-dark: rgba(3, 9, 41, 1);
+  --primary-color: rgba(47, 48, 89, 1);
+  --grayout-color: rgb(104, 113, 150);
+  --grayout-color-background: rgba(241, 243, 248, 0.75);
+  --border-color: rgb(230, 235, 240);
+  --grayout-color-background-light: rgba(250, 251, 253);
+  --blocked-color: rgb(177, 54, 0);
+  --blocked-color-background: rgba(252, 238, 181);
+  --open-color: rgb(0, 176, 191);
+  --open-color-background: rgba(206, 251, 255);
+  --in-progress-color: rgb(62, 64, 219);
+  --in-progress-color-background: rgba(214, 216, 255);
+  --completed-color: rgb(8, 162, 104);
+  --completed-color-background: rgba(225, 255, 204);
+}
+
+.primary-light {
+  color: var(--primary-color-light);
+}
+.primary-dark {
+  color: var(--primary-color-dark);
+}
+.accent-grayout {
+  color: var(--grayout-color);
+  &.accent-background {
+    background-color: var(--grayout-color-background);
+  }
+}
+
+.blocked {
+  color: var(--blocked-color);
+  background-color: var(--blocked-color-background);
+  &.lighten {
+    background-color: color-mix(in srgb, var(--blocked-color-background), white 65%);
+    box-shadow: 0 0 0 1px var(--blocked-color-background);
+  }
+}
+.open {
+  color: var(--open-color);
+  background-color: var(--open-color-background);
+  &.lighten {
+    background-color: color-mix(in srgb, var(--open-color-background), white 65%);
+    box-shadow: 0 0 0 1px var(--open-color-background);
+  }
+}
+.in-progress {
+  color: var(--in-progress-color);
+  background-color: var(--in-progress-color-background);
+  &.lighten {
+    background-color: color-mix(in srgb, var(--in-progress-color-background), white 65%);
+    box-shadow: 0 0 0 1px var(--in-progress-color-background);
+  }
+}
+.complete {
+  color: var(--completed-color);
+  background-color: var(--completed-color-background);
+  &.lighten {
+    background-color: color-mix(in srgb, var(--completed-color-background), white 65%);
+    box-shadow: 0 0 0 1px var(--completed-color-background);
+  }
+}
+
+.elevated-button {
+  --background-color: white;
+  font-size: 1.5rem;
+  height: 32px;
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 1),
+    0 1px 3px 0 rgba(200, 207, 233, 1);
+  border-radius: 7px;
+  background-color: var(--background-color);
+  color: var(--primary-color);
+  letter-spacing: 0.33px;
+  transition: background-color 100ms ease-in-out;
+  will-change: background-color;
+  &.primary-button {
+    --background-color: var(--primary-color-light);
+    color: white;
+  }
+  &:active {
+    // * Variable swap value, darken button when pressed
+    box-shadow: none;
+    background-color: color-mix(in srgb, var(--background-color), black 20%);
+  }
+  &:disabled {
+    filter: grayscale(100%);
+    pointer-events: none;
+  }
+}
+
+.card {
+  display: flex;
+  align-items: center;
+  font-size: 1.4rem;
+  font-weight: 400;
+  margin-right: auto;
+  padding: 0 8px;
+  max-height: 25px;
+  height: 25px;
+  border-radius: 5px;
+}
+
+.error-msg {
+  display: inline-block;
+  padding-top: 5px;
+  font-size: 1.4rem;
+  font-weight: 400;
+  color: crimson;
+}
+
+.cdk-virtual-scroll-viewport {
+  height: 100%;
+}
+
+.cdk-overlay-dark-backdrop {
+  background-color: rgba(247, 249, 252, 0.5);
+}
+
+.cdk-virtual-scroll-content-wrapper {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+}
+.mat-datepicker-content {
+  background-color: white !important;
+  margin-top: 7px;
+  box-shadow:
+    0 0 0 1px rgba(104, 113, 150, 0.1),
+    0 2.5px 3px -1.5px rgba(200, 207, 233, 1),
+    0 4.5px 5px -1px rgba(216, 220, 235, 1) !important;
+  border-radius: 5px !important;
+}
+
+.mat-mdc-tooltip .mdc-tooltip__surface {
+  padding: 5px 0 !important;
+  width: 130px;
+  color: rgb(249, 250, 255);
+  font-weight: 400;
+  font-size: 14px;
+
+  box-shadow:
+    0 2px 4px -2px rgba(200, 207, 233, 1),
+    0 0 16px -8px rgba(230, 235, 240, 1);
+  border-radius: 8px;
+  background-color: rgba(104, 113, 150, 1);
+  text-align: center;
+  user-select: none;
+  pointer-events: none;
+}
+
+.mat-calendar-body-selected {
+  background-color: var(--in-progress-color-background) !important;
+  color: var(--in-progress-color) !important;
+}
+
+.mat-calendar-body-today:not(.mat-calendar-body-selected) {
+  border-color: var(--in-progress-color-background) !important;
+}
+
+.mat-calendar-body-cell:hover .mat-calendar-body-cell-content:not(.mat-calendar-body-selected) {
+  background-color: var(--grayout-color-background) !important;
+}
+
+html {
+  /* Default browser font size is 16px. 
+     10 / 16 = 0.625 
+     This sets the base to 10px without breaking user browser settings. */
+  font-size: 62.5%;
+}
+
+body {
+  font-family: var(--main-font);
+  margin: 0;
+
+  h1 {
+    font-size: 2.4rem;
+    margin: 0 0 26px 0;
+    color: var(--primary-color-dark);
+  }
+
+  h2 {
+    font-size: 1.4rem;
+    font-weight: 500;
+    margin: 0;
+  }
+
+  p,
+  span,
+  button,
+  input {
+    font-size: 1.3rem;
+    color: var(--primary-color);
+  }
+
+  input {
+    font-size: 1.4rem;
+    color: var(--primary-color);
+  }
+
+  label {
+    font-size: 1.4rem;
+    color: var(--grayout-color);
+    font-weight: 500;
+  }
+
+  button,
+  a {
+    &:focus-visible {
+      cursor: pointer;
+      outline: 1px solid var(--primary-color-light);
+    }
+  }
+
+  button {
+    background-color: white;
+    border: none;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}

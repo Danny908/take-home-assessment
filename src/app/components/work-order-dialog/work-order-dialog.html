@@ -1,0 +1,82 @@
+@if (contentVisible()) {
+  <div
+    class="work-order-details"
+    aria-labelledby="modal-title"
+    animate.enter="slide-in-animation"
+    animate.leave="slide-out-animation"
+  >
+    <header>
+      <div>
+        <h2 id="modal-title" class="primary-dark">Work Order Details</h2>
+        <span class="accent-grayout">Specify the dates, name and status for this order</span>
+      </div>
+      <div class="actions">
+        <button class="elevated-button" (click)="closeOrder()">Cancel</button>
+        <button
+          class="elevated-button primary-button"
+          [disabled]="workOrderForm.invalid"
+          (click)="createOrder()"
+        >
+          {{ isEditing ? 'Save' : 'Create' }}
+        </button>
+      </div>
+    </header>
+    <form [formGroup]="workOrderForm">
+      <div>
+        <label for="name">Work Order Name</label>
+        <app-input formControlName="name" placeholder="Acme Inc."></app-input>
+        @if (workOrderForm.get('name')?.hasError('required') && workOrderForm.get('name')?.dirty) {
+          <span class="error-msg">Work order name is required.</span>
+        }
+      </div>
+      <div>
+        <label>Status</label>
+        <app-dropdown
+          [options]="statuses"
+          formControlName="status"
+          icon="arrow_drop_down"
+          placeholder="Select a status"
+        >
+          <ng-template #selectionEl let-value let-display="display">
+            @if (value) {
+              <span class="card" [class]="value">{{ display }}</span>
+            }
+          </ng-template>
+        </app-dropdown>
+        @if (
+          workOrderForm.get('status')?.hasError('required') && workOrderForm.get('status')?.dirty
+        ) {
+          <span class="error-msg">Status is required.</span>
+        }
+      </div>
+      <div>
+        <label> End date </label>
+        <app-date-picker placeholder="01.01.2026" formControlName="endDate"></app-date-picker>
+        @if (
+          workOrderForm.get('endDate')?.hasError('required') && workOrderForm.get('endDate')?.dirty
+        ) {
+          <span class="error-msg">End date is required.</span>
+        }
+      </div>
+      <div>
+        <label> Start date </label>
+        <app-date-picker placeholder="02.02.2026" formControlName="startDate"></app-date-picker>
+        @if (
+          workOrderForm.get('startDate')?.hasError('required') &&
+          workOrderForm.get('startDate')?.dirty
+        ) {
+          <span class="error-msg">Start date is required.</span>
+        }
+      </div>
+      @if (
+        workOrderForm.get('startDate')?.hasError('dateRangeInvalid') ||
+        workOrderForm.get('endDate')?.hasError('dateRangeInvalid')
+      ) {
+        <span class="error-msg">Start date cannot be greater than End date.</span>
+      }
+      @if (workOrderForm.hasError('datesOverlap')) {
+        <span class="error-msg">Date range is overlapping with existing order.</span>
+      }
+    </form>
+  </div>
+}

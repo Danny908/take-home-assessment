@@ -1,0 +1,12 @@
+<div class="input-container">
+  <input
+    class="custom-native-input"
+    [matDatepicker]="workOrderPicker"
+    [placeholder]="placeholder"
+    [value]="val()"
+    (focus)="workOrderPicker.open()"
+    (keydown)="onlyNumbers($event)"
+    (dateChange)="handleDateChange($event)"
+  />
+  <mat-datepicker #workOrderPicker (closed)="onBlur()"></mat-datepicker>
+</div>

@@ -1,0 +1,73 @@
+div.work-order-details {
+  height: 100%;
+  box-shadow:
+    0 5px 15px 0 rgba(216, 220, 235, 1),
+    0 2.5px 3px -1.5px rgba(200, 207, 233, 1),
+    0 4.5px 5px -1px rgba(216, 220, 235, 1);
+  border-radius: 12px 0px 0px 12px;
+  background-color: white;
+  will-change: transform;
+
+  > header {
+    display: flex;
+    padding: 16px 25px;
+    border-bottom: 1px solid var(--border-color);
+    div:first-child {
+      display: block;
+      h2 {
+        font-size: 2rem;
+      }
+      span {
+        font-size: 1.6rem;
+      }
+    }
+    div.actions {
+      display: flex;
+      justify-content: end;
+      align-items: center;
+      gap: 8px;
+      flex: 1 1 auto;
+      button {
+        width: 66px;
+      }
+    }
+  }
+  > form {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding: 24px;
+    > div {
+      label {
+        display: block;
+        margin-bottom: 8px;
+      }
+    }
+  }
+}
+
+.slide-in-animation {
+  animation: in-animation 250ms ease-in-out;
+}
+
+.slide-out-animation {
+  animation: out-animation 250ms ease-in-out;
+}
+
+@keyframes in-animation {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes out-animation {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
